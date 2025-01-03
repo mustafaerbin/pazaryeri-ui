@@ -1,0 +1,39 @@
+//{
+//  "extends": "./tsconfig.json",
+//  "compilerOptions": {
+//    "outDir": "./dist/out-tsc",
+//    "types": [],
+//    "paths": {
+//      "jszip": [
+//        "../node_modules/jszip/dist/jszip.min.js"
+//      ]
+//    }
+//  },
+//  "files": ["src/main.ts","src/polyfills.ts"],
+//  "include": ["src/**/*.d.ts"],
+//  "exclude": ["jest.config.ts", "src/**/*.test.ts", "src/**/*.spec.ts"]
+//}
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "baseUrl": "./src/",
+    "types": [],
+    "paths": {
+      "jszip": [
+        "../node_modules/jszip/dist/jszip.min.js"
+      ]
+    }
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/test.ts",
+    "src/**/*.spec.ts"
+  ]
+}

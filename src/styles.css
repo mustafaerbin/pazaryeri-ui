@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: "Inter", "Noto Sans", "Lato", "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    color: #2d353c;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background-color: #eaeff2;
+    overflow: hidden;
+}
+
+/* You can add global styles to this file, and also import other style files */

@@ -1,0 +1,31 @@
+<div class="h-full relative">
+  <p-panel header="{{'label.anasayfa.yenilikler' | translate}}">
+    <div class="flex gap-2">
+      <div *ngFor="let val of yenilikler">
+        <a href="{{val.value | translate}}" target="_blank">
+          <p-tag severity="success" [rounded]="true" value="{{val.label | translate}}"><span></span></p-tag>
+        </a>
+      </div>
+    </div>
+  </p-panel>
+
+  <p-panel header="{{'label.anasayfa.destek.hatti.bilgileri' | translate}}">
+    <table class="width100">
+      <tbody>
+      <tr>
+        <td *ngFor="let destek of destekHattiBilgileri">
+          <div class="destek-hatti-icon-and-value">
+            <i class="pi text-xl" [ngClass]="{'pi-phone': destek.tur === 't', 'pi-envelope': destek.tur === 'm', 'pi-globe': destek.tur === 'l'}"></i>
+            <div [innerHTML]="destek.deger" class="destek-hatti-deger"></div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </p-panel>
+
+  <p-panel header="{{'label.anasayfa.uyari.baslik' | translate}}">
+    <p>{{anasayfaUyari}} {{'label.anasayfa.uyari' | translate}}</p>
+  </p-panel>
+
+</div>

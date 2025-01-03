@@ -1,0 +1,77 @@
+<div class="card">
+  <p-steps [model]="items" [(activeIndex)]="activeIndex" styleClass="steps-custom"></p-steps>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_1">
+  <form [formGroup]="entityForm">
+    <app-amac-hedef formControlName="amacHedefBilgileri"></app-amac-hedef>
+  </form>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_2">
+  <p-panel>
+    <app-faaliyet></app-faaliyet>
+  </p-panel>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_3">
+  <p-panel>
+    <app-is-birlik></app-is-birlik>
+  </p-panel>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_4">
+  <p-panel>
+    <app-hedef-oran></app-hedef-oran>
+  </p-panel>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_5">
+  <p-panel>
+    <app-boyut-kume></app-boyut-kume>
+  </p-panel>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_6">
+  <p-panel>
+    <app-kaynak></app-kaynak>
+  </p-panel>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_7">
+  <p-panel>
+    <app-risk></app-risk>
+  </p-panel>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_8">
+  <p-panel>
+    <app-ozet></app-ozet>
+  </p-panel>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_9">
+  <p-panel>
+    <app-hedef-tarihce></app-hedef-tarihce>
+  </p-panel>
+</div>
+
+<div *ngIf="activeIndex === STEPS.STEP_10">
+  <p-panel>
+    <app-dosya></app-dosya>
+  </p-panel>
+</div>
+
+<div class="mb-2">
+  <button pButton id="btn_geri_don_1" type="button" label="{{'btn.geri' | translate}}" (click)="geri()"
+          [disabled]="this.activeIndex === this.STEPS.STEP_1 || geriButtonDisabled"
+          class="ui-button-secondary"
+          icon="fa fa-fw fa-angle-left"></button>
+
+  <button pButton id="btn_devam_1" label="{{'btn.ileri' | translate}}"
+          [disabled]="this.entityForm.invalid"
+          class="ui-button-secondary"
+          iconPos="right"
+          icon="fa fa-fw fa-angle-right"
+          (click)="devam()"></button>
+</div>

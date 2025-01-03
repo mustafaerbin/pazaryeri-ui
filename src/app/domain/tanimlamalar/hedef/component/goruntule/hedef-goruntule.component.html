@@ -1,0 +1,21 @@
+<p-panel header="{{'label.unvan.goruntuleme' | translate}}">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div>
+      <label class="first">{{ 'label.ad' | translate }}</label>
+      {{ entity.adi }}
+    </div>
+    <div>
+      <label class="first">{{ 'label.aciklama' | translate }}</label>
+      {{ entity.aciklama }}
+    </div>
+    <div>
+      <label class="first">{{ 'label.durum' | translate }}</label>
+      {{ enums.Durum[entity.durum] | translate }}
+    </div>
+  </div>
+  <p-footer class="inline-grid grid-cols-1 gap-1">
+    <button id="btn_geri_don" pButton label="{{'btn.geri.don' | translate}}" (click)="goBack()" type="button"></button>
+  </p-footer>
+</p-panel>
+
+

@@ -1,0 +1,28 @@
+<div *ngIf="!selectedSearchOption" class="w-16"></div>
+<ng-container *ngIf="selectedSearchOption">
+  <div class="flex flex-row items-center gap-2 px-4 text-gray-500 hover:text-gray-800 cursor-pointer"
+       pTooltip="{{selectedSearchOption.searchLabel}}" tooltipPosition="bottom">
+    <span class="text-lg w-4 text-center fa fa-{{selectedSearchOption.spanClass}}"></span>
+    <span class="fa fa-caret-down"></span>
+  </div>
+  <div #searchOptionOverlayEl></div>
+  <p-overlayPanel #searchOptionOverlay styleClass="search-option-overlay">
+    <ng-template pTemplate="content">
+      <ng-container
+        *ngTemplateOutlet="selectOptionMenuTemplate; context: {$implicit: searchOptions}"></ng-container>
+    </ng-template>
+
+  </p-overlayPanel>
+
+  <ng-template #selectOptionMenuTemplate let-searchOptionItems>
+    <ul class="grid grid-cols-3 gap-1">
+      <li *ngFor="let item of searchOptionItems" id="selector_search_option_{{item.searchOption}}" class="p-2 items-center search-option-item" [ngClass]="{'selected' : selectedSearchOption.searchOption === item.searchOption}"
+          (click)="searchOptionOverlay.hide(); searchOptionClick($event, item)">
+              <span class="p-1 px-2" *ngIf="item.spanClass" [ngClass]="'fa fa-' + item.spanClass"
+                    [ngStyle]="item.iconStyle"></span>
+        <span class="" *ngIf="item.escape !== false; else htmlLabel">{{ item.searchLabel }}</span>
+        <ng-template #htmlLabel><span class="p-menuitem-text" [innerHTML]="item.searchLabel"></span></ng-template>
+      </li>
+    </ul>
+  </ng-template>
+</ng-container>

@@ -1,0 +1,8 @@
+.destek-hatti-icon-and-value {
+  display: flex;
+  align-items: center;
+}
+
+.destek-hatti-deger {
+  margin-left: 10px;
+}

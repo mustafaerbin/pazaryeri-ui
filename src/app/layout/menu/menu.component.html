@@ -1,0 +1,99 @@
+<div class="sidebar-menu-container">
+  <ng-container *ngIf="loading">
+    <div class="flex flex-none">
+      <ul class="menu-root-ul">
+        <ng-template ngFor [ngForOf]="[].constructor(6)">
+          <li class="menu-root-item mb-4">
+            <p-skeleton height="4rem" width="4rem"></p-skeleton>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!loading">
+    <div class="flex flex-none">
+      <ul class="menu-root-ul-scroll menu-root-ul" role="menubar" [ngClass]="{ toggle: opened && !openedSearch }" >
+        <ng-container *ngFor="let menuModelRoot of menuModel | async">
+          <li class="menu-root-separator" *ngIf="menuModelRoot?.separator"></li>
+          <li class="menu-root-item"
+              [id] = "'menu-root-item_' + menuModelRoot.id"
+              *ngIf="!menuModelRoot?.separator"
+              [pTooltip]="'menu.label.kisayol.info' | translate" [tooltipDisabled]="menuModelRoot?.id !== 'bookmark' || opened"
+              tooltipPosition="right" [escape]="false" tooltipStyleClass="menu-tooltip"
+              [ngClass]="{ active: menuModelRoot.id === this.activeRoot }"
+              (click)="onRootClick($event, this.el, menuModelRoot.id!)"
+              (mouseenter)="onRootMouseEnter($event, this.el, menuModelRoot.id!)">
+            <span [class]="menuModelRoot.iconClass" [style]="menuModelRoot.style"></span>
+            <!--            <svg-icon-->
+            <!--              *ngIf="menuModelRoot.iconPath"-->
+            <!--              class="menu-root-item-icon"-->
+            <!--              [src]="menuModelRoot.iconPath"></svg-icon>-->
+            <div class="menu-root-item-icon-text">
+              {{ menuModelRoot.labelKey | translate}}
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+
+    <div class="menu-item-overlay" #menuOverlay [ngClass]="{ active: opened }">
+      <ng-container *ngIf="opened && openedBookmarks">
+        <div class="menu-item-overlay-content scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent scrollbar-thumb-rounded-lg"
+             [id]="'menu-item-overlay-content-bookmark'"
+             [ngClass]="{active: 'bookmark' === activeRoot}">
+          <div class="flex flex-row">
+            <h2 class="header flex flex-1">{{ 'menu.kisayollar' | translate }}</h2>
+          </div>
+          <app-menu-bookmark [refreshEvent]="bookmarkRefreshEvent"></app-menu-bookmark>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="opened && openedSearch">
+        <div class="menu-item-overlay-content scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent scrollbar-thumb-rounded-lg"
+             [id]="'menu-item-overlay-content-search'"
+             [ngClass]="{active: 'search' === activeRoot}">
+          <app-menu-page-search [clearEvent]="openedSearchEvent"></app-menu-page-search>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="opened && !openedBookmarks && !openedSearch">
+        <ng-container *ngFor="let menuModelRoot of menuModel | async">
+          <div *ngIf="!menuModelRoot.separator || menuModelRoot.renderable"
+               class="menu-item-overlay-content scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent scrollbar-thumb-rounded-lg"
+               [id]="'menu-item-overlay-content-' + menuModelRoot.id"
+               [ngClass]="{ active: menuModelRoot.id === activeRoot }">
+            <div class="flex flex-row">
+              <h2 class="header flex flex-1">{{ menuModelRoot.labelKey | translate }}</h2>
+            </div>
+            <div class="w-max flex flex-col items-start">
+              <ng-container *ngFor="let subItem of menuModelRoot.items">
+                <ng-container *ngIf="!!subItem.items && subItem.items.length > 0">
+                  <div class="submenu-list-content">
+                    <span class="submenu-header">{{subItem.labelKey | translate}}</span>
+                    <div class="submenu-list"
+                         [ngClass]="(subItem.styleClass) ? subItem.styleClass : 'grid grid-cols-3'">
+                      <ng-container *ngFor="let subSubItem of subItem.items">
+                        <span class="submenu-item" *ngIf="subSubItem.link"
+                              role="menuitem"
+                              (click)="navigate(subSubItem)"
+                              [id]="subSubItem.id">
+                          <span class="submenu-item-text">{{ subSubItem.labelKey | translate }}</span>
+                          <!--                          <span class="submenu-item-fav"><fa-icon [icon]="iconStar"></fa-icon> </span>-->
+                        </span>
+                      </ng-container>
+                    </div>
+                  </div>
+                </ng-container>
+                <div class="submenu-list-content" [ngClass]="(subItem.styleClass) ? subItem.styleClass : 'grid grid-cols-3'">
+                  <ng-container *ngIf="subItem.items.length === 0">
+                    <span class="submenu-item" (click)="navigate(subItem)" role="menuitem" [id]="subItem.id">
+                      <span class="submenu-item-text">{{ subItem.labelKey | translate }}</span>
+                    </span>
+                  </ng-container>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,30 @@
+<div *ngIf="errorService.isError" class="app-error">
+  <span *ngIf="!showError" class="fa fa-5x fa-exclamation-circle error-button pointer"
+        pTooltip="{{'error.details' | translate}}" (click)="openDialog()"></span>
+
+  <p-dialog #dialog
+            [header]="'error.details' | translate"
+            [(visible)]="showError"
+            [modal]="true"
+
+            [autoZIndex]="false"
+            [style]="{maxWidth: '600px'}">
+
+    <div class="grid grid-cols-1">
+      <div>
+        <span>{{'label.hatayi.bize.gonderin' | translate}}</span>
+      </div>
+      <div>
+        <label for="message">{{'label.mesaj' | translate}}</label>
+        <textarea id="message" pInputTextarea [(ngModel)]="message" [rows]="6"></textarea>
+      </div>
+    </div>
+
+    <p-footer class="inline-grid grid-cols-2 gap-1">
+      <button type="button" pButton label="{{'label.hata.indir' | translate}}" icon="fa fa-download"
+              (click)="clickDownload()"></button>
+      <button type="button" pButton label="{{'label.sayfayi.yenile' | translate}}" icon="fa fa-sync-alt"
+              (click)="clickRefresh()" class="p-button-secondary"></button>
+    </p-footer>
+  </p-dialog>
+</div>

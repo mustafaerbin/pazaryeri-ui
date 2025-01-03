@@ -1,0 +1,74 @@
+:host ::ng-deep #kayitlariSecSpinner button.p-inputNumber-button {
+  display: none;
+}
+
+:host ::ng-deep #kayitlariSecSpinner input.p-inputNumber-input {
+  height: 28px;
+  padding-right: 0;
+  margin-right: 28px;
+}
+
+:host ::ng-deep #kayitlariSecSpinner input.p-inputtext:enabled:hover:not(.p-state-error),
+:host ::ng-deep #kayitlariSecSpinner input.p-inputtext:enabled:focus:not(.p-state-error) {
+  border-right: inherit;
+}
+
+:host ::ng-deep p-accordion.no-margin .p-accordion-content.p-widget-content {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.iptalLabel {
+  text-decoration: line-through;
+}
+
+.redHighlightLabel {
+  color: #f06;
+}
+.degisikIsredHighlightLabel {
+  color: #e29292;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.fa-user-orange:before {
+  content: "\f007";
+  color: #FFA500;
+}
+
+.fa-power-off-orange:before {
+  content: "\f011";
+  color: #FFA500;
+}
+
+.hatirlatmaOncelik {
+  color: #7c7676;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px #ccc;
+}
+
+.hatirlatmaOncelik1 {
+  color: #FFC107;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px #ccc;
+}
+
+.hatirlatmaOncelik2 {
+  color: #4CAF50;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px #ccc;
+}
+
+.p-button-icon-sp {
+  left: 50px;
+  width: 2.357rem;
+  padding: 0.25rem 0;
+}
+
+.hatirlatmaOncelik3 {
+  color: #f20d24;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px #ccc;
+}

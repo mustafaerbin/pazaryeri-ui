@@ -1,0 +1,24 @@
+<div class="layout-content">
+  <p-messages id="messages" class="sticky top-0 z-40" [ngStyle]="{'inset': 'auto'}"></p-messages>
+  <div class="flex items-center py-2" *ngIf="appStore.header">
+    <div class="flex flex-1">
+      <p-header class="page-header" [textContent]="appStore.header | translate"></p-header>
+    </div>
+    <div class="flex flex-none">
+      <app-bookmark class="pointer" style="font-size:large; color:goldenrod; margin-left:10px"></app-bookmark>
+    </div>
+  </div>
+<!--      <p-breadcrumb [model]="appStore.breadcrumbs" [home]="home" class="flex flex-1 w-full px-0 pb-4"></p-breadcrumb>-->
+  <router-outlet></router-outlet>
+</div>
+<p-confirmDialog #cd acceptLabel="{{'btn.evet' | translate}}" rejectLabel="{{'btn.hayir' | translate}}"
+                 acceptButtonStyleClass="test_evet" rejectButtonStyleClass="test_hayir">
+  <ng-template pTemplate="footer">
+    <button id="btn_yes" type="button" pButton icon="pi pi-check" label="{{'btn.evet' | translate}}"
+            class="p-button p-button-success"
+            (click)="cd.accept()"></button>
+    <button id="btn_no" type="button" pButton icon="pi pi-times" label="{{'btn.hayir' | translate}}"
+            class="p-button p-button-danger"
+            (click)="cd.reject()"></button>
+  </ng-template>
+</p-confirmDialog>

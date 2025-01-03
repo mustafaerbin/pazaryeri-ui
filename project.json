@@ -1,0 +1,137 @@
+{
+  "name": "tedas-hrys-ui-ng",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "./src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/tedas-hrys-ui-ng",
+        "index": "./src/index.html",
+        "main": "./src/main.ts",
+        "polyfills": ["./src/polyfills.ts"],
+        "tsConfig": "./tsconfig.app.json",
+        "aot": false,
+        "assets": [
+          "./src/favicon.ico",
+          "./src/assets",
+          {
+            "glob": "**/*",
+            "input": "./src/assets/tinymce/langs",
+            "output": "/tinymce/langs/"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/tinymce",
+            "output": "/tinymce/"
+          }
+        ],
+        "styles": [
+          "node_modules/primeng/resources/primeng.min.css",
+          "node_modules/quill/dist/quill.snow.css",
+          "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+          "node_modules/primeicons/primeicons.css",
+          "node_modules/pivottable/dist/pivot.css",
+          "./src/styles.scss"
+        ],
+        "scripts": [
+          "node_modules/jquery/dist/jquery.js",
+          "node_modules/moment/moment.js",
+          "node_modules/chart.js/dist/chart.js",
+          "node_modules/quill/dist/quill.js",
+          "node_modules/jquery/dist/jquery.min.js",
+          "node_modules/jquery-ui-dist/jquery-ui.min.js",
+          "node_modules/pivottable/dist/pivot.min.js",
+          "node_modules/tinymce/tinymce.min.js",
+          "node_modules/jszip/dist/jszip.min.js",
+          "node_modules/file-saver/dist/FileSaver.min.js"
+        ],
+        "vendorChunk": true,
+        "extractLicenses": false,
+        "buildOptimizer": false,
+        "sourceMap": true,
+        "optimization": false,
+        "namedChunks": true
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "./src/environments/environment.ts",
+              "with": "./src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "aot": true,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": ""
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "tedas-hrys-ui-ng:build:production"
+        },
+        "development": {
+          "buildTarget": "tedas-hrys-ui-ng:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "tedas-hrys-ui-ng:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "tsConfig": [
+        "tsconfig.app.json",
+        "tsconfig.spec.json",
+        "./src"
+      ],
+      "exclude": [
+        "**/node_modules/**"
+      ]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectName}"],
+      "options": {
+        "jestConfig": "jest.config.ts"
+      }
+    }
+  }
+}

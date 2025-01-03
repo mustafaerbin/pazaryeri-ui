@@ -1,0 +1,14 @@
+.router-content-wrapper {
+  height: calc(100vh - 6.75rem);
+}
+
+.content-overlay-bg {
+  overflow-y: hidden;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 6.5rem;
+  left: 5rem;
+  z-index: 10000;
+  --bg-opacity: 0.4;
+}

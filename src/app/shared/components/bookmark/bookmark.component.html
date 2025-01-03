@@ -1,0 +1,7 @@
+<span *ngIf="loading" class="pi pi-spin pi-spinner"></span>
+<span
+  *ngIf="markable && !loading"
+  ngClass="{{(favorite ? 'fa fa-star' : 'far fa-star')}}"
+  pTooltip="{{(favorite ? 'label.kisayol.kaldir' : 'label.kisayol.ekle') | translate}}"
+  tooltipPosition="left"
+  (click)="handleClick()"></span>

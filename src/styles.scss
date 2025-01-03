@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+/*@import 'assets/theme/theme-teal.css';*/
+//@import 'assets/layout/css/layout-teal.css';
+
+@import "@fontsource/inter/latin.css";
+@import "@fontsource/inter/latin-ext.css";
+@import "assets/primeng-sass-theme/lega/theme.scss";
+
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'LegaIcons';
+  font-style: normal;
+  font-display: block;
+  src: url('./assets/fonts/LegaIcons.woff2') format('woff2');
+
+}
+
+:host ::ng-deep html {
+  font-size: 12px;
+}
+
+body > app-root {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 1000px;
+}
+
+body .ui-spinner {
+  color: black;
+}
+
+.first {
+  display: block;
+  font-size: small;
+  font-weight: bold;
+  /*opacity: 0.7;*/
+  color: #39566c;
+  margin-top: 0.4rem;
+}
+
+.key-criteria {
+  color: #380170;
+  font-weight: bold;
+}
+
+.p-inputtext {
+  width: 100% !important;
+}
+
+.p-table table {
+  table-layout: auto;
+}
+
+.p-calendar {
+  width: 100%;
+}
+
+.p-calendar.p-calendar-w-btn input {
+  width: calc(100% - 2em) !important;
+}
+
+.p-dropdown {
+  width: 100% !important;
+  background: none;
+}
+
+.p-autocomplete {
+  width: 100%;
+  display: inline-flex;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.icon-button .p-button-text {
+  width: 25px;
+  height: 0;
+}
+
+.p-datatable-header {
+  text-align: left !important;
+}
+
+.app-overlay-outer-div {
+  position: relative
+}
+
+.app-overlay {
+  width: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+.app-overlay .p-overlaypanel-content {
+  padding: 0;
+}
+
+.app-overlay-panel-block {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%, -50%);
+}
+
+.app-pasif-inline {
+  color: #d5d5d5;
+}
+
+.app-auto-complete {
+  opacity: 1 !important;
+}
+
+.app-auto-complete-pasif .app-auto-complete {
+  text-decoration-line: line-through !important;
+}
+
+.app-tree-container {
+  overflow: auto;
+  width: 100%;
+  max-height: 160px;
+  //min-width: max-content;
+}
+
+.app-button-container {
+  width: 100%;
+  padding: 5px;
+  border-top: 1px solid #D5D5D5;
+  background: #d0d8dc;
+  display: flex;
+  align-items: center;
+  //min-width: max-content;
+}
+
+.display-none {
+  display: none;
+}
+
+.p-datatable table {
+  table-layout: auto !important;
+}
+
+.app-table-icon-col {
+  width: 1px;
+  right: 0;
+}
+
+.app-table-icon-col > span {
+  padding-left: 2px;
+}
+
+.app-table-icon-col > span > a {
+  display: table-cell;
+  padding-right: 3px;
+  font-size: medium;
+}
+
+.app-table-select-col {
+  width: 3em;
+  text-align: left;
+  background: white;
+}
+
+.app-table-overlay {
+  //position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+}
+
+.kisayol-info-icon {
+  color: goldenrod;
+  display:inline;
+  font-size: 1rem;
+}
+
+.p-table-wrapper {
+  /*overflow-x: auto*/;
+  /*overflow-y: hidden*/;
+}
+
+.app-table-filter-column {
+  float: right;
+  display: inline;
+}
+
+.app-table-number {
+  text-align: right;
+}
+
+.app-table-date {
+  text-align: center;
+}
+
+.app-table-islemler {
+  text-align: center !important;
+  white-space: nowrap;
+  right: 0;
+}
+.app-table-islemler > a {
+  padding: 1px;
+  font-size: medium;
+  background: inherit;
+}
+
+.selected-row-complete .app-table-islemler {
+
+}
+
+.messages {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.p-datepicker-buttonbar > div > div {
+  text-align: left;
+}
+
+.p-tabview-panel {
+  border: none !important;
+  padding: 0 !important;
+}
+
+.wrappedData {
+  width: 350px;
+  height: 48px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.exception-body {
+  height: 100%;
+}
+
+body .p-table .p-table-tbody > tr:nth-child(odd).p-state-highlight,
+body .p-table .p-table-tbody > tr:nth-child(even).p-state-highlight {
+  color: #2d353c;
+}
+
+.p-g > .p-g-12 > span {
+  display: inline-block;
+}
+
+.p-blockui {
+  min-height: 60px;
+}
+
+.tab-panel {
+  min-height: 60px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.wordwrap {
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-bottom: -0.385em;
+}
+
+//.p-inputswitch-slider {
+//  background: #ffffff !important;
+//}
+
+span.fa.fa-check.yes.size20 {
+  font-size: 20px;
+  color: #59DE1F;
+}
+
+span.fa.fa-times.no.size20 {
+  font-size: 20px;
+  color: #FF0000;
+}
+
+span.fa.fa-square.DosyaSorun1 {
+  color: #fff302;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px #ccc;
+}
+
+span.fa.fa-square.DosyaSorun2 {
+  color: #f86e00;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px #ccc;
+}
+
+span.fa.fa-square.DosyaSorun3 {
+  color: #f20d24;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px #ccc;
+}
+
+.wrappingwords {
+  white-space: pre-line;
+}
+
+.page-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+}

@@ -1,0 +1,25 @@
+<form [formGroup]="entityForm" (ngSubmit)="confirm()">
+  <p-panel header="{{'label.hedef.tanimlama' | translate}}" class="grid grid-cols-1">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <label for="adi" class="first">{{ 'label.ad' | translate }}</label>
+        <input id="adi" pInputText type="text" formControlName="adi" />
+        <app-validation-message [validationControl]="entityForm.controls['adi']"></app-validation-message>
+      </div>
+      <div>
+        <label for="aciklama" class="first">{{ 'label.aciklama' | translate }}</label>
+        <input id="aciklama" pInputText type="text" formControlName="aciklama" />
+        <app-validation-message [validationControl]="entityForm.controls['aciklama']"></app-validation-message>
+      </div>
+      <div>
+        <label class="first">{{ 'label.durum' | translate }}</label>
+        <p-dropdown [options]="durumList" formControlName="durum"></p-dropdown>
+        <app-validation-message [validationControl]="entityForm.controls['durum']"></app-validation-message>
+      </div>
+    </div>
+  </p-panel>
+  <div class="inline-grid grid-cols-2 gap-1 my-2">
+    <button id="btn_kaydet" pButton label="{{'btn.kaydet' | translate}}" [disabled]="!entityForm.valid"></button>
+    <button id="btn_geri_don" pButton label="{{'btn.geri.don' | translate}}" (click)="goBack()" type="button"></button>
+  </div>
+</form>

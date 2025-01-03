@@ -1,0 +1,83 @@
+<div class="login-body">
+  <div class="login-panel ui-fluid">
+    <div>
+      <div class="logo-container">
+        <img src="../../assets/images/innova-logo.png" alt="innova-icon" height="640" width="1755" />
+        <p-message severity="error" text="{{cause | translate}}" class="messages" *ngIf="cause"></p-message>
+        <h2>{{'label.login.message' | translate}}</h2>
+      </div>
+
+      <form #f action="/icra/j_acegi_security_check" method="post" name="loginform">
+        <div class="form-text">
+          <input id="username" pInputText type="text" autocomplete="off"
+                 placeholder="{{'label.kullanici.kodu' | translate}}"
+                 name="j_username" required>
+        </div>
+
+        <div class="form-text">
+          <input id="password" pInputText type="password" autocomplete="off" placeholder="{{'label.sifre' | translate}}"
+                 name="j_password" required>
+        </div>
+
+        <div class="form-text" *ngIf="renderCaptcha">
+          <input pInputText type="text" name="j_captcha_response" autocomplete="off" required
+                 placeholder="{{'label.guvenlik.kodu' | translate}}">
+        </div>
+
+        <div *ngIf="renderCaptcha">
+          <table style="width: 100%">
+            <tr>
+              <td align="center" style="text-align: center">
+                <img [src]="captchaUrl"/>
+              </td>
+              <td align="center" style="text-align: center; padding-right: 20px;">
+                <a (click)="refreshCaptcha()" style="cursor: pointer">
+                  <span class="fa fa-sync-alt captcha"></span>
+                </a>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+
+        <div class="button-container">
+          <button type="submit" name="login" (click)="submit()" [disabled]="!f.checkValidity() || buttonClick"
+                  class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only green-btn raised-btn rounded-btn">
+            <span class="ui-button-text ui-c">{{'btn.giris' | translate}}</span>
+          </button>
+        </div>
+
+        <div class="center-div">
+          <h2 style="color: #afafc0; font-size: 13px;">
+            <span>{{'label.sifrenizi.hatirlamiyorsaniz' | translate}} </span>
+            <span style="color:#58585a;"> {{'btn.sifremi.unuttum' | translate}}</span>
+          </h2>
+        </div>
+      </form>
+
+      <hr class="center-div"/>
+
+      <div class="center-div">
+
+        <div *ngFor="let sirketBilgileri of sirketBilgileriList" [ngSwitch]="sirketBilgileri.tur" style="color:#58585a;">
+
+          <span *ngSwitchCase="'t'">
+            <span class="fa fa-phone"></span>
+          </span>
+          <span *ngSwitchCase="'l'">
+            <span class="far fa-hand-point-up"></span>
+          </span>
+          <span *ngSwitchCase="'m'">
+            <span class="fa fa-envelope"></span>
+          </span>
+          <span *ngSwitchDefault>
+            <span class="fa fa-circle"></span>
+          </span>
+          <span [innerHTML]="sirketBilgileri.deger"></span>
+        </div>
+
+        <div style="color: #afafc0; font-size: 10px; padding-top: 20px">{{versiyon}}</div>
+      </div>
+    </div>
+  </div>
+</div>

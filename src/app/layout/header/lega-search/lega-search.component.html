@@ -1,0 +1,113 @@
+<p-tabView class="grid grid-cols-1" (onChange)="changeTab($event)" [(activeIndex)]="activeTab" [selectOnFocus]="true">
+  <p-tabPanel header="{{'header.search.tab.genel' | translate}}">
+    <div class="grid grid-cols-1 gap-4">
+      <div>
+        <div class="flex flex-row justify-start flex-nowrap gap-1" *ngIf="searchOptions.length > 0">
+          <div class="flex flex-1 pt-2">
+            <p style="min-width: 10rem"><b>Arama Seçeneği</b></p>
+
+          </div>
+          <ng-container
+            *ngTemplateOutlet="selectOptionMenuTemplate; context: {$implicit: searchOptions}"></ng-container>
+        </div>
+      </div>
+      <div class="flex flex-nowrap justify-center items-center align-middle lega-search-input-container">
+        <input id="input_lega_advanced_search"
+               class="lega-search-input"
+               role="searchbox"
+               #searchInput
+               type="text"
+               (keydown.enter)="searchCriteria(searchInput.value)"
+               [placeholder]="searchInputPlaceholder" autofocus="autofocus"/>
+        <button id="btn_lega_advanced_search" (click)="searchCriteria(searchInput.value)" class="pr-4"><i
+          class="pi pi-search text-xl"></i></button>
+      </div>
+
+      <ng-container
+        *ngTemplateOutlet="historyTemplate; context: {$implicit: searchHistory}"></ng-container>
+    </div>
+  </p-tabPanel>
+</p-tabView>
+
+<ng-template #historyTemplate let-items>
+  <div *ngIf="items?.length > 0" class="border border-slate-300 border-t-0 my-2"></div>
+  <b *ngIf="items?.length > 0">Geçmiş Dosya Aramalarınız</b>
+  <div
+    class="search-suggestions-list scrollbar-thin  scrollbar-thumb-rounded-lg scrollbar-track-transparent scrollbar-thumb-gray-500">
+    <ul>
+      <li *ngFor="let suggestion of items" (click)="onHistoryClick(suggestion)"
+          class="search-suggestion-item">
+        <div class="flex flex-nowrap items-center">
+          <span class="flex flex-none search-suggestion-item-icon"><span class="fa fa-history"></span></span>
+          <span class="flex flex-1 historic">{{ suggestion.text }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #selectOptionMenuTemplate let-searchOptionItems>
+  <ul class="grid grid-cols-3 gap-1">
+    <li *ngFor="let item of searchOptionItems" id="selector_search_option_{{item.searchOption}}" class="p-2 items-center search-option-item" [ngClass]="{'selected' : selectedOption.searchOption === item.searchOption}"
+        (click)="selectSearchOption(item)">
+              <span class="p-1 px-2" *ngIf="item.spanClass" [ngClass]="'fa fa-' + item.spanClass"
+                    [ngStyle]="item.iconStyle"></span>
+      <span class="" *ngIf="item.escape !== false; else htmlLabel">{{ item.searchLabel }}</span>
+      <ng-template #htmlLabel><span class="p-menuitem-text" [innerHTML]="item.searchLabel"></span></ng-template>
+    </li>
+  </ul>
+</ng-template>
+<!--
+<div class="p-inputgroup">
+  <div style="height: 27px; width: 150px">
+    <input id="menuArama_id" class="mr-1 py-1 pl-10 pr-1 border" pInputText type="text"
+           (keyup.enter)="menuArama()" style="height: 100%"
+           placeholder="{{'label.sayfa.veya.rapor.adi.ile.ara' | translate}}"/>
+  </div>
+  <div class="relative" style="height: 27px; width: 150px">
+    <input type="text" style="padding-left: 30px; height: 100%;" class="py-1 pl-10 pr-1 border" #folderInput
+           id="dosyaArama_id"
+           pInputText (keyup.enter)="dosyaBilgisiGetir(folderInput.value)">
+    <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                    <i (click)="opp.toggle($event)" [ngClass]="searchIcon"></i>
+                </span>
+  </div>
+
+  <p-overlayPanel #opp>
+    <div *ngFor="let item of this.searchCriteriaList; let i = index">
+      <a (click)="setSearchCriteria(item.searchOption, opp)">
+        <div class="flex flex-col searchCriteria">
+          <div class="grid grid-cols-3" style="grid-template-columns: 10% 50% auto;">
+            <div class="{{item.icon}}"></div>
+            <div>{{item.searchLabel}}</div>
+            <div>CTRL + ALT + {{item.shortCutKey}}</div>
+          </div>
+          <hr *ngIf="item.searchOption == 'mercidosyano' ||
+                               item.searchOption == 'borcluadisoyadi' ||
+                               item.searchOption == 'anahtarkelime' ||
+                               item.searchOption == 'faturano' ||
+                               item.searchOption == 'hasardosyano'"
+              style="background-color: #446e83; height: 1px">
+        </div>
+      </a>
+    </div>
+  </p-overlayPanel>
+  <div>
+    <p-button type="button" (click)="dosyaBilgisiGetir(folderInput.value)"
+              icon="fa fa-search"
+              pTooltip="{{'btn.sorgula' | translate}}"></p-button>
+  </div>
+  <div>
+    <p-button type="button" (click)="op.toggle($event)"
+              icon="fa fa-history" pTooltip="{{'label.gecmis' | translate}}"></p-button>
+  </div>
+  <p-overlayPanel #op>
+    <div class="op-overlay">
+      <div *ngFor="let item of this.historyViewList; let i = index">
+        <a class="historyView"
+           (click)="dosyaGoruntulemeTarihce(item.history)"><span>{{item.history}}</span></a>
+      </div>
+    </div>
+  </p-overlayPanel>
+</div>
+//-->

@@ -1,0 +1,31 @@
+.lega-search-input {
+  @apply w-full p-4 text-xl border-0 rounded-lg outline-none focus:outline-none
+}
+
+.lega-search-input-container {
+  @apply rounded-lg border border-gray-700 outline-none
+}
+
+.lega-search-input-icon {
+  @apply text-2xl py-4 pl-4
+}
+
+/* Mouse üzerine gelindiğinde vurgulanacak stil */
+li:hover {
+  background-color: #f0f0f0; /* Vurgulama rengi */
+  cursor: pointer; /* Fare imleci el işareti yapar */
+}
+
+/* Aktif öneriyi vurgula */
+li.active {
+  background-color: #3498db; /* Aktif vurgulama rengi */
+  color: white; /* Yazı rengi */
+}
+
+.header-delete {
+  @apply text-xl pr-4
+}
+
+.header-loading {
+  @apply text-xl pr-4
+}

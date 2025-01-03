@@ -1,0 +1,22 @@
+<div *ngIf="loading">
+  <div class="submenu-list-content grid grid-cols-1">
+    <ng-template ngFor [ngForOf]="[].constructor(4)">
+    <p-skeleton width="15rem" height="1.5rem" class="pb-2"></p-skeleton>
+    </ng-template>
+  </div>
+</div>
+<div *ngIf="!loading">
+  <ng-container *ngIf="bookmarkModel.value.length > 0">
+  <div class="submenu-list-content grid grid-cols-1">
+    <ng-container *ngFor="let menuModelRoot of bookmarkModel | async">
+      <a class="submenu-item" [routerLink]="menuModelRoot.link" role="menuitem" [id]="menuModelRoot.id">
+        <span class="submenu-item-text">{{ menuModelRoot.labelKey | translate }}</span>
+      </a>
+    </ng-container>
+  </div>
+  </ng-container>
+  <ng-container *ngIf="bookmarkModel.value.length == 0">
+    <div class="p-2">{{'menu.label.kisayol.yok' | translate}}</div>
+  </ng-container>
+
+</div>

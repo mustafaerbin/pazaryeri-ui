@@ -1,0 +1,165 @@
+<div class="flex flex-row items-center" *ngIf="loading">
+  <div class="px-4 flex flex-none pr-8">
+  </div>
+</div>
+<!--<form [formGroup]="toolbarForm" (ngSubmit)="submitForm()" *ngIf="toolbarData && infoPanelData && !loading">-->
+<!--<div class="flex flex-row items-center" *ngIf="toolbarData && infoPanelData && !loading"-->
+<!--     [ngStyle]="{'background': sirketTemaBgGradient}">-->
+  <div class="flex flex-row items-center"
+       [ngStyle]="{'background': sirketTemaBgGradient}">
+  <div class="px-4 flex flex-none">
+    <app-logo [logoSrc]="toolbarData.logoUrl"
+              [sirketLogoSrc]="toolbarData.sirketLogoUrl" [routerLink]="'/'" style="cursor:pointer"></app-logo>
+  </div>
+
+  <div class="flex flex-1 flex-col justify-center items-start px-8">
+    <div class="flex flex-none flex-nowrap items-center w-full" style="max-width: 30rem">
+    <!--  <div
+        class="flex flex-row w-full border rounded-full border-gray-500 hover:border-gray-800 bg-white shadow-sm pr-2 items-center">
+        <app-search-option-selector (searchOptionSelected)="searchOptionSelected($event)"></app-search-option-selector>
+        <input id="input_lega_search"
+               class="header-search-input"
+               role="searchbox"
+               #searchInput
+               type="text"
+               placeholder="Lega'da Ara"
+               (keydown.enter)="onSearchDone($event)"
+               (focus)="onSearchInputFocus($event)"
+               (paste)="onSearchPaste($event)"
+               aria-autocomplete="list"
+               aria-haspopup="true"
+        />
+        <i id="btn_lega_fast_search"
+           class="pi pi-search header-search-icon"
+           [pTooltip]="'label.ara' | translate"
+           tooltipPosition="bottom"
+           (click)="onSearchDone($event)"
+        ></i>
+        <i id="btn_lega_search_history"
+           class="fa fa-history header-search-icon"
+           [pTooltip]="('label.gecmis' | translate)"
+           tooltipPosition="bottom" (click)="searchHistoryOverlay.show($event); showHistoryList($event)"
+        ></i>
+      </div>-->
+      <!--<p-button id="btn_lega_search_detailed"
+                icon="pi pi-search"
+                styleClass="w-[20rem] p-button-lg p-button-outlined p-button-rounded lega-search-button"
+                iconPos="left" label="Lega'da Ara" [badge]="searchButtonBadge" (onClick)="showSearchDialog($event)">
+      </p-button>-->
+    </div>
+    <div #searchHistoryWrapper class="flex flex-1"></div>
+    <p-overlayPanel #searchHistoryOverlay [appendTo]="searchHistoryWrapper">
+      <ng-template pTemplate="content">
+        <ng-container *ngIf="searchHistoryLoading">
+
+          <ng-template ngFor [ngForOf]="[].constructor(4)">
+            <div class="pb-3">
+              <p-skeleton width="12rem" height="1.5rem"></p-skeleton>
+            </div>
+          </ng-template>
+        </ng-container>
+        <ng-container
+          *ngTemplateOutlet="historyTemplate; context: {$implicit: searchHistory}"></ng-container>
+      </ng-template>
+    </p-overlayPanel>
+  </div>
+  <p-dialog [position]="'top'" [modal]="true"
+            [draggable]="false" [resizable]="false" styleClass="search-dialog"
+            header="Lega'da Ara" [(visible)]="searchDialogVisible">
+    <app-lega-search #appLegaSearchDetail [minLength]="3" [visible]="searchDialogVisible" (searchEnd)="searchEnd()"
+                     (suggestionSelected)="suggestionSelected($event)"></app-lega-search>
+  </p-dialog>
+  <div *ngIf="toolbarData">
+    <div class="flex flex-none flex-nowrap justify-end gap-2">
+      <app-shortcut-icons [toolbarData]="toolbarData"></app-shortcut-icons>
+
+<!--      <div class="flex flex-none flex-nowrap">-->
+<!--        <div class="border border-gray-400 flex items-center cursor-pointer bg-white p-1 rounded" id="btn_bakisAcisi"-->
+<!--             pTooltip="{{ 'menu.genel.bakisacisi.sirket.degistir' | translate }}"-->
+<!--             (click)="showAspectCompanyChangeDialog($event)"-->
+<!--             tooltipPosition="bottom">-->
+<!--          <span>{{toolbarData.currentBakisAcisiAndSirket}}</span>-->
+<!--        </div>-->
+
+<!--      </div>-->
+
+      <div class="flex flex-none flex-nowrap">
+        <!--<div class="border border-gray-400 flex items-center cursor-pointer bg-white p-1 rounded" id="btn_bakisAcisi"
+             pTooltip="Şirket"
+             tooltipPosition="bottom">
+          <span>TEDAŞ</span>
+        </div>-->
+
+      </div>
+
+      <div class="flex flex-none border border-none justify-center items-center cursor-pointer" (click)="avatarMenuOverlay.toggle($event)"
+           [ngClass]="{'is-supervised': infoPanelData.isSupervisor}"
+           [pTooltip]="'Kullanıcı Kodu' + ' - ' + 'Kullanıcı Adı'" tooltipPosition="bottom"
+      >
+        <div class="px-2" style="max-width: 8rem; text-overflow: ellipsis; overflow: hidden">
+          <b>Ad Soyad</b>
+        </div>
+        <p-avatar [label]="'KAS'" styleClass="p-2" size="normal"
+                  [style]="{'background-color': avatarBackground(infoPanelData.userMonogram) , 'color': '#ffffff'}"
+                  shape="square"></p-avatar>
+        <!--              (click)="avatarMenu.toggle($event)"-->
+        <!--    <p-tieredMenu #avatarMenu [model]="avatarMenuModel" [popup]="true"></p-tieredMenu>-->
+      </div>
+
+      <div class="flex flex-none">
+        <!--        <p-badge severity="danger" value="DESTEK MODU" size="xlarge"></p-badge>-->
+      </div>
+
+      <p-overlayPanel #avatarMenuOverlay [dismissable]="true" styleClass="avatar-menu-overlay">
+        <ng-template pTemplate="content">
+          <div class="grid grid-cols-1">
+            <div class="flex flex-row items-center p-4 gap-4">
+              <div class="flex flex-none">
+                <p-avatar [label]="infoPanelData.userMonogram" size="large"
+                          [style]="{'background-color': avatarBackground(infoPanelData.userMonogram) , 'color': '#ffffff'}"
+                          shape="square"></p-avatar>
+              </div>
+              <div class="flex flex-col flex-1">
+                <p><b>{{infoPanelData.userCode}}</b></p>
+                <p>{{infoPanelData.userDisplayName}}</p>
+              </div>
+            </div>
+            <div class="py-4">
+              <ng-container
+                *ngTemplateOutlet="avatarMenuTemplate; context: {$implicit: avatarMenuModel}"></ng-container>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template #avatarMenuTemplate let-menuItems>
+          <ul class="">
+            <li *ngFor="let item of menuItems" [id]="'btn_avatarmenu_'+item.id" class="p-2 items-center"
+                (click)="avatarMenuOverlay.hide(); avatarMenuItemClick($event, item)">
+              <span class="p-1 px-2" *ngIf="item.icon" [ngClass]="item.icon" [class]="item.iconClass"
+                    [ngStyle]="item.iconStyle"></span>
+              <span class="" *ngIf="item.escape !== false; else htmlLabel">{{ item.label }}</span>
+              <ng-template #htmlLabel><span class="p-menuitem-text" [innerHTML]="item.label"></span></ng-template>
+            </li>
+          </ul>
+        </ng-template>
+      </p-overlayPanel>
+    </div>
+  </div>
+</div>
+<ng-template #historyTemplate let-items>
+  <span *ngIf="!searchHistoryLoading && items?.length <= 0">Arama geçmişi yok</span>
+  <b *ngIf="items?.length > 0">Geçmiş Aramalarınız</b>
+  <div
+    class="search-suggestions-list scrollbar-thin  scrollbar-thumb-rounded-lg scrollbar-track-transparent scrollbar-thumb-gray-500">
+    <ul>
+      <li *ngFor="let suggestion of items" (click)="onHistoryClick(suggestion)"
+          class="search-suggestion-item">
+        <div class="flex flex-nowrap items-center">
+          <span class="flex flex-none search-suggestion-item-icon"><span class="fa fa-history"></span></span>
+          <span class="flex flex-1 historic">{{ suggestion.text }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+<!--</form>-->

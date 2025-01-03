@@ -1,0 +1,26 @@
+<div *ngIf="!authService.identityClaims; else loggedIn">
+  <button (click)="authService.login()">Login</button>
+</div>
+<ng-template #loggedIn>
+  <div>Welcome, {{authService.identityClaims?.['name']}}</div>
+  <button (click)="authService.logout()">Logout</button>
+</ng-template>
+<router-outlet></router-outlet>
+<p-blockUI [blocked]="appStore.loading">
+  <p-progressSpinner strokeWidth="3"></p-progressSpinner>
+</p-blockUI>
+<app-error></app-error>
+<p-confirmDialog #idleCd closable="false"
+                 key="idleCd"
+                 icon="pi pi-exclamation-mark">
+  <ng-template pTemplate="footer">
+    <button type="button" id="idleConfirm_continueSession"
+            pButton icon="pi pi-refresh" [label]="'label.devam.et' | translate"
+            class="p-button p-button-success"
+            (click)="idleCd.accept()"></button>
+    <button type="button" id="idleConfirm_endSession"
+            pButton  icon="pi pi-sign-out" [label]="'label.oturumu.kapat' | translate"
+            class="p-button p-button-danger"
+            (click)="idleCd.reject()"></button>
+  </ng-template>
+</p-confirmDialog>

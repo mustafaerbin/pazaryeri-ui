@@ -1,0 +1,11 @@
+.app-error {
+  z-index: 9999;
+  position: relative;
+}
+
+.error-button {
+  color: red;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}

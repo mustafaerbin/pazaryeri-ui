@@ -1,0 +1,20 @@
+{
+  "TR": "Turkish",
+  "EN": "English",
+  "AKTIF": "Aktif",
+  "PASIF": "Pasif",
+  "MANTIKSAL_SILINMIS": "Manıtıksal Silinmiş",
+  "SISTEM_ASAMASI": "Sistem Aşaması",
+  "ICRA_ASAMASI": "İcra Aşaması",
+  "BORCLU_ASAMASI": "Borçlu Aşaması",
+  "MAL_ASAMASI": "Mal Aşaması",
+  "DAVA_ASAMASI": "Dava Aşaması",
+  "MERCI_ASAMASI": "Merci Aşaması",
+  "SATIS_ASAMASI": "Satış Aşaması",
+  "TALIMAT_ASAMASI": "Talimat Aşaması",
+  "DEGISIK_IS_ASAMASI": "Değişik İş Aşaması",
+  "DOKUM_ASAMASI": "Döküm Aşaması",
+  "ARAMA_ASAMASI": "Arama Aşaması",
+  "DURUM_ASAMASI": "Durum Aşaması",
+  "TEMINAT_ASAMASI": "Teminat Aşaması"
+}

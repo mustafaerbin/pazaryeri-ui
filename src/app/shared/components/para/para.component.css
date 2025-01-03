@@ -1,0 +1,17 @@
+.p-disabled {
+  opacity: .5;
+}
+
+.decimal-seperator {
+  @apply p-1 bg-gray-400
+}
+
+.para-birimi-dropdown-icon.p-dropdown {
+  min-width: 2rem !important;
+  width: 5rem;
+}
+
+.para-birimi-dropdown-label.p-dropdown {
+  min-width: 2rem !important;
+  width: 5rem;
+}

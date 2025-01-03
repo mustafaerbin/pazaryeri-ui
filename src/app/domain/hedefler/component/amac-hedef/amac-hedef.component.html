@@ -1,0 +1,66 @@
+<form *ngIf="entityForm" [formGroup]="entityForm" (ngSubmit)="confirm()">
+
+  <p-panel header="{{'label.amac.hedef' | translate}}">
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+      <div>
+        <div>
+          <label for="hedefKaynagi" class="first">{{ 'label.hedef.kaynagi' | translate }}</label>
+          <p-dropdown id="hedefKaynagi" [options]="hedefKaynagiOptions" formControlName="hedefKaynagi"></p-dropdown>
+          <!--        <app-validation-message [validationControl]="entityForm.controls['hedefKaynagi']"></app-validation-message>-->
+        </div>
+        <div>
+          <label for="amac" class="first">{{ 'label.amac' | translate }}</label>
+          <p-dropdown id="amac" [options]="amacOptions"
+                      formControlName="amac"></p-dropdown>
+          <!--        <app-validation-message [validationControl]="entityForm.controls['amac']"></app-validation-message>-->
+        </div>
+        <div>
+          <label for="hedef" class="first">{{ 'label.hedef' | translate }}</label>
+          <p-dropdown id="hedef" [options]="hedefOptions"
+                      formControlName="hedef"></p-dropdown>
+          <!--        <app-validation-message [validationControl]="entityForm.controls['hedef']"></app-validation-message>-->
+        </div>
+        <div>
+          <label for="altHedef" class="first">{{ 'label.alt.hedef' | translate }}</label>
+          <p-dropdown id="altHedef" [options]="altHedefOptions"
+                      formControlName="altHedef"></p-dropdown>
+          <!--        <app-validation-message [validationControl]="entityForm.controls['hedef']"></app-validation-message>-->
+        </div>
+        <div>
+          <label for="isAnahtarPerformansGostergesi"
+                 class="first">{{ 'label.anahtar.performans.gostergesi.mi' | translate }}</label>
+          <div class="flex gap-4">
+            <p-dropdown class="w-5/6" id="isAnahtarPerformansGostergesi" [options]="evetHayirOptions"
+                        formControlName="isAnahtarPerformansGostergesi"></p-dropdown>
+            <!--        <app-validation-message [validationControl]="entityForm.controls['isAnahtarPerformansGostergesi']"></app-validation-message>-->
+            <a class="w-1/6 self-center fa fa-lg fa-info-circle pointer" (click)="showDialog();"></a>
+          </div>
+        </div>
+        <div>
+          <label for="hedefOnemDerecesi" class="first">{{ 'label.hedef.onem.derecesi' | translate }}</label>
+          <div class="flex gap-4">
+            <p-dropdown class="w-5/6" id="hedefOnemDerecesi" [options]="hedefOnemDerecesiOptions"
+                        formControlName="hedefOnemDerecesi"></p-dropdown>
+            <!--        <app-validation-message [validationControl]="entityForm.controls['hedefOnemDerecesi']"></app-validation-message>-->
+            <a class="w-1/6 self-center fa fa-lg fa-info-circle pointer" (click)="showDialog();"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-panel>
+  <div class="inline-grid grid-cols-3 gap-1 mb-2">
+    <button id="btn_temizle" pButton label="{{'btn.temizle' | translate}}" (click)="temizleAction()"
+            type="button"></button>
+    <button id="btn_duzenle" pButton label="{{'btn.duzenle' | translate}}" (click)="duzenleAction()"></button>
+    <button id="btn_kaydet" pButton label="{{'btn.kaydet' | translate}}" [disabled]="!entityForm.valid"></button>
+  </div>
+</form>
+
+<p-dialog header="{{'label.aski.bilgileri' | translate}}" [(visible)]="dialogVisible"
+          [style]="{width: '70vw'}" (onHide)="onHide()" [modal]="true" [dismissableMask]="true">
+  <p-panel>
+    <div>
+      Anahtar Performans Gostergesi Aciklama
+    </div>
+  </p-panel>
+</p-dialog>

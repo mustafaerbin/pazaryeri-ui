@@ -1,0 +1,37 @@
+<div class="p-inputgroup">
+  <input #integerRef
+         pInputText
+         style="text-align: right;"
+         maxlength="18"
+         pKeyFilter="int"
+         (input)="updateInteger($event.target.value)"
+         (blur)="fix()"
+         onfocus="this.select()"
+         [disabled]="isDisabled">
+  <span class="decimal-seperator">,</span>
+  <input #decimalRef
+         pInputText
+         style="width: 3em !important;"
+         maxlength="2"
+         pKeyFilter="int"
+         (input)="updateDecimal($event.target.value)"
+         (blur)="fix()"
+         onfocus="this.select()"
+         [disabled]="isDisabled">
+  <p-dropdown [ngStyle]="{'width': '5rem'}" *ngIf="!hideParaBirimi" [disabled]="disableParaBirimi || isDisabled" [options]="paraBirimiList" [(ngModel)]="para.paraBirimi"
+              [styleClass]="dropdownClass" (onChange)="paraBirimiChange($event)">
+    <ng-template let-item pTemplate="selectedItem">
+      <span [class]="item.icon" *ngIf="item.icon" pTooltip="{{item.label}}"></span>
+      <span *ngIf="!item.icon">{{item.label}}</span>
+    </ng-template>
+
+    <ng-template let-item pTemplate="item">
+      <div style="width: 100%">
+        <span [class]="item.icon" style="display: table-cell; padding-right: 2px"></span>
+        <span style="display: table-cell; width: 100%; text-align: right">{{item.label}}</span>
+      </div>
+    </ng-template>
+
+  </p-dropdown>
+
+</div>

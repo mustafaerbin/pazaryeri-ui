@@ -1,0 +1,120 @@
+
+<form [formGroup]="sorguForm" (ngSubmit)="sorgula()">
+  <p-panel header="{{'label.sorgu.kriterleri' | translate}}" class="grid grid-cols-1" [toggleable]="true">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <label for="adi" class="first">{{'label.ad' | translate}}</label>
+        <input id="adi" pInputText type="text" formControlName="adi"/>
+        <app-validation-message [validationControl]="sorguForm.controls['adi']"></app-validation-message>
+      </div>
+      <div>
+        <label for="aciklama" class="first">{{'label.aciklama' | translate}}</label>
+        <input id="aciklama" pInputText type="text" formControlName="aciklama"/>
+        <app-validation-message [validationControl]="sorguForm.controls['aciklama']"></app-validation-message>
+      </div>
+      <div>
+        <label for="durum" class="first">{{'label.durum' | translate}}</label>
+        <p-dropdown id="durum" [options]="durumList" formControlName="durum"></p-dropdown>
+        <app-validation-message [validationControl]="sorguForm.controls['durum']"></app-validation-message>
+      </div>
+    </div>
+    <p-footer class="inline-grid grid-cols-3 gap-1">
+      <button id="btn_sorgula" pButton label="{{'btn.sorgula' | translate}}" [disabled]="!sorguForm.valid"></button>
+      <button id="btn_temizle" pButton label="{{'btn.temizle' | translate}}" (click)="temizleAction()" type="button"></button>
+      <button id="btn_yeni_kayit" pButton label="{{'btn.yeni.kayit' | translate}}" [routerLink]="['tanimla']" type="button"></button>
+    </p-footer>
+  </p-panel>
+</form>
+<p-panel header="Hedef Tanımları">
+  <p-table #dt [columns]="filteredCols" styleClass="p-datatable-gridlines p-datatable-striped"
+           [value]="entityStore.sorguSonuclari | async"
+           [lazy]="true" (onLazyLoad)="loadDatas($event)"
+           dataKey="id" [tableStyle]="{'min-width': '75rem'}"
+           [selectAll]="selectAll"
+           [(selection)]="selectedHedef" (selectAllChange)="onSelectAllChange($event)"
+           (selectionChange)="onSelectionChange($event)"
+           [paginator]="true" [rows]="10"
+           [totalRecords]="totalItems" [loading]="isLoading">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th *ngFor="let col of columns">
+          {{col.header | translate}}
+        </th>
+        <th class="app-table-icon-col app-table-overlay">
+          {{'label.islemler' | translate}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="caption">
+      <div style="display: grid; justify-content: start">
+        <div style="display: table-cell; text-align:left;">
+          <ng-content select=".caption"></ng-content>
+        </div>
+        <div style="display:table;">
+          <div  class="p-inputgroup" style="display:table-cell;  text-align: left; vertical-align: middle; width: 32px;">
+            <div class="p-inputgroup">
+              <p-button type="button" (click)="exportToExcel()" icon="far fa-fw fa-file-excel" tooltipOptions="top"
+                        pTooltip="{{'label.excel.disa.aktar' | translate}}"></p-button>
+              <p-button type="button" (click)="exportToPdf()" icon="far fa-fw fa-file-pdf" tooltipOptions="top"
+                        pTooltip="{{'label.pdf.disa.aktar' | translate}}"></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData  let-columns="columns" let-index="rowIndex">
+      <tr id="row_{{index}}" [pSelectableRow]="rowData ">
+        <td>
+          <p-tableCheckbox class="app-table-checkbox"
+                           id="{{'tableCheckbox' + index.toString()}}"
+                           [value]="rowData"></p-tableCheckbox>
+        </td>
+        <td *ngFor="let col of columns">
+          {{(rowData[col.field] | translate)}}
+        </td>
+        <td id="col_islemler"  class="app-table-islemler app-table-overlay">
+          <a id="goruntule" [routerLink]="rowData.id + '/goruntule'"
+             pTooltip="{{'label.goruntule' | translate}}" tooltipPosition="left">
+            <span class="fa fa-search"></span>
+          </a>
+          <a id="guncelle" [routerLink]="rowData.id + '/guncelle'"
+             pTooltip="{{'label.guncelle' | translate}}" tooltipPosition="left">
+            <span class="fa fa-pencil-alt"></span>
+          </a>
+          <a id="sil" [routerLink]="" (click)="silConfirm(rowData.id)"
+             pTooltip="{{'label.sil' | translate}}" tooltipPosition="left">
+            <span class="fa fa-trash-alt"></span>
+          </a>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="5">
+          <ng-content select=".footer"></ng-content>
+        </td>
+      </tr>
+    </ng-template>
+
+
+    <ng-template pTemplate="summary">
+      <div style="display: flex; justify-content: space-between;">
+        <div>
+          <ng-content select=".summary"></ng-content>
+        </div>
+        <div class="p-5">
+          <div *ngIf="entityStore.sorguSonuclari | async as results">
+            {{'label.kayit.sayisi' | translate}} {{totalItems}}
+          </div>
+          <div *ngIf="selectedHedef">
+            {{'label.secilen.kayit.sayisi' | translate}} {{selectedHedef.length}}
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-table>
+</p-panel>
+

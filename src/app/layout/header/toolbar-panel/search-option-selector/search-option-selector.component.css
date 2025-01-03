@@ -1,0 +1,11 @@
+.search-option-overlay .p-overlaypanel-content {
+  padding: .25rem !important;
+}
+
+.search-option-item {
+  @apply rounded
+}
+
+.search-option-item.selected {
+  @apply bg-gray-300
+}

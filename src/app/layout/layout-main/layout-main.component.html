@@ -1,0 +1,14 @@
+<div class="flex flex-col min-h-screen bg-white">
+  <div class="h-27">
+    <app-header></app-header>
+  </div>
+  <div class="flex flex-1">
+    <app-menu class="flex flex-none w-20"></app-menu>
+    <div id="mainContent" class="ml-2 router-content-wrapper scrollbar-thin  scrollbar-thumb-rounded-lg scrollbar-track-transparent scrollbar-thumb-gray-500 bg-gray-100 flex flex-col border border-l border-t border-b-0 shadow-lg w-full rounded rounded-tl-lg rounded-tr-none rounded-bl-none rounded-br-none bottom-0 overflow-x-auto overflow-y-scroll">
+      <div class="px-2 pt-2">
+        <router-outlet (activate)="routerActive($event)"></router-outlet>
+      </div>
+    </div>
+    <div class="content-overlay-bg" [hidden]="layoutMainService.menuOverlayHidden"></div>
+  </div>
+</div>

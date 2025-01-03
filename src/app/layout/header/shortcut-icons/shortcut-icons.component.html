@@ -1,0 +1,180 @@
+<!--<div class="flex flex-none flex-nowrap pt-1" *ngIf="!loading">-->
+<div class="flex flex-none flex-nowrap pt-1">
+ <!-- <i id="btn_shortcut_duyurular"
+     class="shortcut-icon far fa-bell text-xl mr-4"
+     pTooltip="{{ 'label.gnl.yeni.duyuru' | translate }}"
+     tooltipPosition="bottom" (click)="navigate('/duyuru')"
+     *ngIf="appStore.yetkiMap.get('yetki_mesaj_duyuru_sorgula')"
+     pBadge value="{{toolbarData.duyuruSayisi}}" severity="danger"></i>
+
+  <i id="btn_shortcut_mesaj_sorgula"
+     class="shortcut-icon far fa-envelope text-xl mr-4"
+     pTooltip="{{ 'label.gnl.mesajlar' | translate }}"
+     tooltipPosition="bottom" (click)="navigate('/mesaj/sorgula')"
+     *ngIf="appStore.yetkiMap.get('yetki_mesaj_mesaj_sorgula')"
+     pBadge value="{{toolbarData.mesajSayisi}}" severity="danger"></i>
+  <i id="btn_shotcut_ajanda"
+     class="shortcut-icon far fa-calendar hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'label.gnl.ajanda' | translate }}"
+     tooltipPosition="bottom" (click)="navigate('/ajanda')"
+     *ngIf="appStore.yetkiMap.get('yetki_gunluk_hatirlatma')"></i>
+
+  <i id="btn_shortcut_dosyalarim"
+     class="shortcut-icon far fa-file hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'label.infopan.sik.kullanilanlar.dosyalarim.hint' | translate }}"
+     tooltipPosition="bottom" (click)="navigate('/dosyalarim')"
+     *ngIf="appStore.yetkiMap.get('yetki_icra_dosyalarim')"></i>
+
+  <i id="btn_shortcut_icra_dosya_sorgula"
+     class="shortcut-icon fa fa-briefcase hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'label.infopan.sik.kullanilanlar.icra.dosya.sorgulama.hint' | translate }}"
+     tooltipPosition="bottom" (click)="navigate('/icra')"
+     *ngIf="appStore.yetkiMap.get('yetki_icra_dosya_sorgula') ||
+        appStore.yetkiMap.get('yetki_yeni_icra_dosya_sorgula')"></i>
+
+  <i id="btn_shortcut_tum_dosyalari_sorgula"
+     class="shortcut-icon far fa-copy hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'label.infopan.sik.kullanilanlar.tum.dosya.sorgulama.hint' | translate }}"
+     tooltipPosition="bottom" (click)="navigate('/icra/tumDosyalariSorgula')"
+     *ngIf="appStore.yetkiMap.get('yetki_icra_tum_dosyalari_sorgula')"></i>
+
+  <i id="btn_shortcut_taleplerim"
+     class="shortcut-icon fa fa-inbox hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'header.ortak.talep.sorgulama' | translate }}"
+     tooltipPosition="bottom" (click)="navigate('/talep')"></i>
+
+  <i id="btn_shortcut_icra_manuel_tahsilat"
+     class="shortcut-icon fa fa-money-bill hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'label.icra.manuel.tahsilat' | translate }}"
+     tooltipPosition="bottom" (click)="navigate('/manuelTahsilat')"
+     *ngIf="appStore.yetkiMap.get('yetki_icra_manuelTahsilat')"></i>
+
+  <i id="btn_shortcut_icra_vekil_tahsilat"
+     class="shortcut-icon fa fa-credit-card hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'label.dosya.islemler.vekil.tahsilat' | translate }}"
+     tooltipPosition="bottom" (click)="navigate('/vekilManuelTahsilat')"
+     *ngIf="appStore.yetkiMap.get('yetki_icra_vekilTahsilat')"></i>
+
+  <a id="btn_shortcut_icra_bi_raporlama"
+     class="shortcut-icon fa fa-chart-bar hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'label.infopan.sik.kullanilanlar.bi.raporlama.hint' | translate }}"
+     tooltipPosition="bottom" [href]="'/icra/spring/redirect/biReport'" target="_blank"
+     *ngIf="appStore.yetkiMap.get('yetki_bi_raporlama')"></a>
+
+  <a id="btn_shortcut_iMessageSender"
+     class="shortcut-icon fa fa-external-link hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'menu.sistem.yonetimi.imessagesender' | translate }}"
+     tooltipPosition="bottom" [href]="toolbarData.iMessageSenderURL" target="_blank"
+     *ngIf="appStore.yetkiMap.get('yetki_sistem_yonetimi_yonetim_iMessageSender')"></a>
+
+  <a id="btn_shortcut_usermanual"
+     class="shortcut-icon fa fa-book hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'menu.isletim.klavuzu' | translate }}"
+     tooltipPosition="bottom" [href]="toolbarData.userManualURL" target="_blank"></a>-->
+
+<!--  <a id="btn_shortcut_faq"
+     class="shortcut-icon fa fa-medkit hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'label.faq' | translate }}"
+     tooltipPosition="bottom" [href]="toolbarData.urlForFAQ" target="_blank"></a>-->
+
+  <!--<a id="btn_shortcut_yardim"
+     class="shortcut-icon far fa-question-circle hidden xl:inline-block text-xl mr-4"
+     pTooltip="{{ 'menu.genel.yardim' | translate }}"
+     tooltipPosition="bottom" [href]="toolbarData.helpURL" target="_blank"></a>-->
+  <i id="btn_shortcut_hamburger"
+     (click)="shortcutHamburgerMenuOverlay.toggle($event)"
+     class="pi pi-bars inline-block xl:hidden text-xl mr-4"></i>
+</div>
+<p-overlayPanel #shortcutHamburgerMenuOverlay [dismissable]="true" styleClass="hamburger-menu-overlay">
+  <ng-template pTemplate="content">
+    <ng-container *ngTemplateOutlet="shortcutHamburgerMenuTemplate"></ng-container>
+  </ng-template>
+</p-overlayPanel>
+
+<ng-template #shortcutHamburgerMenuTemplate>
+<!--  <ul class="">
+    <li class="p-2 items-center flex flex-none flex-nowrap" (click)="navigate('/ajanda')"
+        id="btn_menu_shortcut_ajanda"
+        *ngIf="appStore.yetkiMap.get('yetki_gunluk_hatirlatma')">
+      <span class="p-1 px-2 far fa-calendar"></span>
+      <span class="">{{ 'label.gnl.ajanda' | translate }}</span>
+    </li>
+
+    <li class="p-2 items-center flex flex-none flex-nowrap" (click)="navigate('/dosyalarim')"
+        id="btn_menu_shortcut_dosyalarim"
+        *ngIf="appStore.yetkiMap.get('yetki_icra_dosyalarim')">
+      <span class="p-1 px-2 far fa-file"></span>
+      <span class="">{{ 'label.infopan.sik.kullanilanlar.dosyalarim.hint' | translate }}</span>
+    </li>
+
+    <li class="p-2 items-center flex flex-none flex-nowrap" (click)="navigate('/icra')"
+        id="btn_menu_shortcut_icra_dosya_sorgula"
+        *ngIf="appStore.yetkiMap.get('yetki_icra_dosya_sorgula') ||
+        appStore.yetkiMap.get('yetki_yeni_icra_dosya_sorgula')">
+      <span class="p-1 px-2 fa fa-briefcase"></span>
+      <span class="">{{ 'label.infopan.sik.kullanilanlar.icra.dosya.sorgulama.hint' | translate }}</span>
+    </li>
+
+    <li class="p-2 items-center flex flex-none flex-nowrap" (click)="navigate('/icra/tumDosyalariSorgula')"
+        id="btn_menu_shortcut_tum_dosyalari_sorgula"
+        *ngIf="appStore.yetkiMap.get('yetki_icra_tum_dosyalari_sorgula')">
+      <span class="p-1 px-2 far fa-copy"></span>
+      <span class="">{{ 'label.infopan.sik.kullanilanlar.tum.dosya.sorgulama.hint' | translate }}</span>
+    </li>
+
+    <li class="p-2 items-center flex flex-none flex-nowrap" (click)="navigate('/talep')" id="btn_menu_shortcut_taleplerim">
+      <span class="p-1 px-2 fa fa-inbox"></span>
+      <span class="">{{ 'header.ortak.talep.sorgulama' | translate }}</span>
+    </li>
+
+    <li class="p-2 items-center flex flex-none flex-nowrap" (click)="navigate('/manuelTahsilat')"
+        id="btn_menu_shortcut_manuel_tahsilat"
+        *ngIf="appStore.yetkiMap.get('yetki_icra_manuelTahsilat')">
+      <span class="p-1 px-2 fa fa-money-bill"></span>
+      <span class="">{{ 'label.icra.manuel.tahsilat' | translate }}</span>
+    </li>
+
+    <li class="p-2 items-center flex flex-none flex-nowrap" (click)="navigate('/vekilManuelTahsilat')"
+        id="btn_menu_shortcut_vekil_tahsilat"
+        *ngIf="appStore.yetkiMap.get('yetki_icra_vekilTahsilat')">
+      <span class="p-1 px-2 fa fa-credit-card"></span>
+      <span class="">{{ 'label.dosya.islemler.vekil.tahsilat' | translate }}</span>
+    </li>
+
+    <li class="p-2 items-center flex flex-none flex-nowrap"
+        *ngIf="appStore.yetkiMap.get('yetki_bi_raporlama')">
+      <a [href]="'/icra/spring/redirect/biReport'" target="_blank" id="btn_menu_shortcut_icra_bi_raporlama">
+        <span class="p-1 px-2 fa fa-chart-bar"></span>
+        <span class="">{{ 'label.infopan.sik.kullanilanlar.bi.raporlama.hint' | translate }}</span>
+      </a>
+    </li>
+
+    <li class="p-2 items-center flex flex-none flex-nowrap"
+        *ngIf="appStore.yetkiMap.get('yetki_sistem_yonetimi_yonetim_iMessageSender')">
+      <a [href]="toolbarData.iMessageSenderURL" target="_blank" id="btn_menu_shortcut_iMessageSender">
+        <span class="p-1 px-2 fa fa-external-link"></span>
+        <span class="">{{ 'menu.sistem.yonetimi.imessagesender' | translate }}</span>
+      </a>
+    </li>
+    <li class="p-2 items-center flex flex-none flex-nowrap">
+      <a [href]="toolbarData.userManualURL" target="_blank" id="btn_menu_shortcut_usermanual">
+        <span class="p-1 px-2 fa fa-book"></span>
+        <span class="">{{ 'menu.isletim.klavuzu' | translate }}</span>
+      </a>
+    </li>
+
+    <li class="p-2 items-center flex flex-none flex-nowrap">
+      <a [href]="toolbarData.urlForFAQ" target="_blank" id="btn_menu_shortcut_faq">
+        <span class="p-1 px-2 fa fa-medkit"></span>
+        <span class="">{{ 'label.faq' | translate }}</span>
+      </a>
+    </li>
+    <li class="p-2 items-center flex flex-none flex-nowrap">
+      <a [href]="toolbarData.helpURL" target="_blank" id="btn_menu_shortcut_yardim">
+        <span class="p-1 px-2 fa fa-question-circle"></span>
+        <span class="">{{ 'menu.genel.yardim' | translate }}</span>
+      </a>
+    </li>
+
+  </ul>-->
+</ng-template>

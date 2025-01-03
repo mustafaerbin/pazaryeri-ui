@@ -1,0 +1,21 @@
+<div class="info-panel" *ngIf="infoPanelData" [ngClass]="{'supervised-mode-bg': this.infoPanelData.isSupervisor}"
+     [ngStyle]="{'color': textColor, 'background': sirketTemaBg}">
+
+  <div class="flex py-1 flex-row items-center">
+    <div class="px-1 flex flex-none">
+      <span>{{this.infoPanelData.serverDate | dateFormat}}</span>
+    </div>
+    <div class="flex flex-1 justify-start">
+      <span class="px-1">{{infoPanelData.serverNameOrInstanceNo}}</span>
+      <span class="px-1">{{infoPanelData.datasourceSchemaName}}</span>
+      <span class="px-1">{{infoPanelData.applicationVersion}}</span>
+    </div>
+    <!--<div *ngIf="this.infoPanelData.isSupervisor" class="flex flex-none justify-end px-4">
+      <span class="supervised-mode-text blink">{{'label.supervisor.mode.enabled' | translate}}
+        <span class="" *ngIf="this.infoPanelData.supervisorUsername">
+          [{{infoPanelData.supervisorUsername}} - {{infoPanelData.supervisorDisplayName}}]
+        </span>
+      </span>
+    </div>-->
+  </div>
+</div>

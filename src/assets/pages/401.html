@@ -1,0 +1,14 @@
+<div class="exception-body">
+  <p-messages *ngIf="message" class="flex w-full" [value]="[message]"></p-messages>
+
+  <div class="exception-panel" style="margin-top: 100px">
+    <img src="./assets/layout/images/icon-access.png" alt="access"/>
+
+    <h1>{{'label.erisim.engellendi' | translate}}</h1>
+    <p>{{'label.erisim.engellendi.detay' |translate}}</p>
+    <button type="button" class="p-button black-btn p-widget p-state-default p-corner-all rounded-btn"
+            (click)="appStore.location.back()">
+      <span class="p-button-text p-c" style="padding:5px;"> {{'btn.geri.don' | translate}} </span>
+    </button>
+  </div>
+</div>

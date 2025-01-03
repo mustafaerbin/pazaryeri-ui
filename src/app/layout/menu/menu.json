@@ -1,0 +1,355 @@
+[
+  {
+    "id": "menu_anasayfa",
+    "labelKey": "menu.anasayfa",
+    "iconClass": "pi-chart-pie",
+    "separator": false,
+    "link": "/anasayfa",
+    "cols": 3,
+    "shortPath": [],
+    "items": [],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": null,
+    "labelKey": null,
+    "iconClass": null,
+    "separator": true,
+    "link": null,
+    "cols": 3,
+    "shortPath": [],
+    "items": [],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": "menu_hedefler",
+    "labelKey": "menu.hedefler",
+    "iconClass": "menu-root-item-icon menu-klasor",
+    "separator": false,
+    "link": null,
+    "cols": 3,
+    "shortPath": [],
+    "items": [
+      {
+        "id": "menu_yeni_hedef_olustur",
+        "labelKey": "menu.yeni_hedef_olustur",
+        "iconClass": "menu-root-item-icon menu-icra",
+        "separator": false,
+        "link": "/yeni-hedef",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_hedeflerim",
+        "labelKey": "menu.hedeflerim",
+        "iconClass": "menu-root-item-icon menu-icra",
+        "separator": false,
+        "link": "/hedefler",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      }
+    ],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": null,
+    "labelKey": null,
+    "iconClass": null,
+    "separator": true,
+    "link": null,
+    "cols": 3,
+    "shortPath": [],
+    "items": [],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": "menu_onay_islemlerim",
+    "labelKey": "menu.onay_islemlerim",
+    "iconClass": "menu-root-item-icon menu-gorev-fisi",
+    "separator": false,
+    "link": "/onay-islemlerim",
+    "cols": 3,
+    "shortPath": [],
+    "items": [],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": null,
+    "labelKey": null,
+    "iconClass": null,
+    "separator": true,
+    "link": null,
+    "cols": 3,
+    "shortPath": [],
+    "items": [],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": "menu_talep_islemlerim",
+    "labelKey": "menu.talep_islemlerim",
+    "iconClass": "menu-root-item-icon menu-bookmark",
+    "separator": false,
+    "link": null,
+    "cols": 3,
+    "shortPath": [],
+    "items": [
+      {
+        "id": "menu_yeni_talep",
+        "labelKey": "menu.yeni_talep",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": "/yeni-talep",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_taleplerim",
+        "labelKey": "menu.taleplerim",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": "/taleplerim",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_gelen_talepler",
+        "labelKey": "menu.gelen_talepler",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": "/gelen-talepler",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      }
+    ],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": null,
+    "labelKey": null,
+    "iconClass": null,
+    "separator": true,
+    "link": null,
+    "cols": 3,
+    "shortPath": [],
+    "items": [],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": "menu_bildirimler",
+    "labelKey": "menu.bildirimler",
+    "iconClass": "menu-root-item-icon menu-finans",
+    "separator": false,
+    "link": "/bildirimler",
+    "cols": 3,
+    "shortPath": [],
+    "items": [],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": null,
+    "labelKey": null,
+    "iconClass": null,
+    "separator": true,
+    "link": null,
+    "cols": 3,
+    "shortPath": [],
+    "items": [],
+    "styleClass": "",
+    "shortcutName": null
+  },
+  {
+    "id": "menu_tanimlamalar",
+    "labelKey": "menu.tanimlamalar",
+    "iconClass": "menu-root-item-icon menu-rapor",
+    "separator": false,
+    "link": null,
+    "cols": 3,
+    "shortPath": [],
+    "items": [
+      {
+        "id": "menu_tanimlama_onay_islem_durumlari",
+        "labelKey": "menu.tanimlama_onay_islem_durumlari",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": "tanimlama-onay-islem-durumlari",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_hedef_kutuphanesi",
+        "labelKey": "menu.hedef_kutuphanesi",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": "/hedef-kutuphanesi",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_amac_hedef_althedef",
+        "labelKey": "menu.amac_hedef_althedef",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": null,
+        "cols": 3,
+        "shortPath": [],
+        "items": [
+          {
+            "id": "menu_amac",
+            "labelKey": "menu.amac",
+            "iconClass": "menu-root-item-icon menu-bookmark",
+            "separator": false,
+            "link": "/amac",
+            "cols": 3,
+            "shortPath": [],
+            "items": [],
+            "styleClass": "",
+            "shortcutName": null
+          },
+          {
+            "id": "menu_hedef",
+            "labelKey": "menu.hedef",
+            "iconClass": "menu-root-item-icon menu-bookmark",
+            "separator": false,
+            "link": "/hedef",
+            "cols": 3,
+            "shortPath": [],
+            "items": [],
+            "styleClass": "",
+            "shortcutName": null
+          },
+          {
+            "id": "menu_alt_hedef",
+            "labelKey": "menu.alt_hedef",
+            "iconClass": "menu-root-item-icon menu-bookmark",
+            "separator": false,
+            "link": "/alt-hedef",
+            "cols": 3,
+            "shortPath": [],
+            "items": [],
+            "styleClass": "",
+            "shortcutName": null
+          }
+        ],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_boyut_kume",
+        "labelKey": "menu.boyut_kume",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": null,
+        "cols": 3,
+        "shortPath": [],
+        "items": [
+          {
+            "id": "menu_boyut",
+            "labelKey": "menu.boyut",
+            "iconClass": "menu-root-item-icon menu-bookmark",
+            "separator": false,
+            "link": "boyut",
+            "cols": 3,
+            "shortPath": [],
+            "items": [],
+            "styleClass": "",
+            "shortcutName": null
+          },
+          {
+            "id": "menu_kume",
+            "labelKey": "menu.kume",
+            "iconClass": "menu-root-item-icon menu-bookmark",
+            "separator": false,
+            "link": "kume",
+            "cols": 3,
+            "shortPath": [],
+            "items": [],
+            "styleClass": "",
+            "shortcutName": null
+          }
+        ],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_gosterge",
+        "labelKey": "menu.gosterge",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": "gosterge",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_takvim",
+        "labelKey": "menu.takvim",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": "takvim",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_yaklasma_degerlendirmesi",
+        "labelKey": "menu.yaklasma_degerlendirmesi",
+        "iconClass": "menu-root-item-icon menu-bookmark",
+        "separator": false,
+        "link": "yaklasma-degerlendirmesi",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      },
+      {
+        "id": "menu_info_tanimlamalari",
+        "labelKey": "menu.info_tanimlamalari",
+        "iconClass": "menu-root-item-icon menu-uyap",
+        "separator": false,
+        "link": "info-tanimlamalari",
+        "cols": 3,
+        "shortPath": [],
+        "items": [],
+        "styleClass": "",
+        "shortcutName": null
+      }
+    ],
+    "styleClass": "",
+    "shortcutName": null
+  }
+]

@@ -1,0 +1,53 @@
+<div class="grid grid-cols-1">
+  <div>
+  </div>
+  <div class="flex flex-nowrap justify-center items-center align-middle page-search-input-container">
+
+    <span class="lega-icon lega-icon-page-search page-search-input-icon"></span>
+    <input id="input_lega_page_search"
+           class="page-search-input"
+           role="searchbox"
+           #pageInput
+           type="text"
+           tabindex="0"
+           (input)="inputChanged($event)"
+           (click)="inputClicked($event)"
+           autocomplete="off"
+           [placeholder]="'header.search.tab.sayfa' | translate"/>
+    <span *ngIf="loading" class="header-loading">
+        <i class="text-xl pi pi-spin pi-spinner"></i>
+          </span>
+    <span *ngIf="pageInput.value.length > 0" class="cursor-pointer header-delete" (click)="$event.preventDefault(); pageInput.value = ''">
+        <i class="text-xl pi pi-times"></i>
+          </span>
+
+  </div>
+  <ng-container *ngIf="searchingSuggestions">
+    <ng-container
+      *ngTemplateOutlet="searchSuggestionsTemplate; context: {$implicit: searchSuggestions}"></ng-container>
+  </ng-container>
+</div>
+
+
+<ng-template #searchSuggestionsTemplate let-items>
+  <div class="border border-slate-300 border-t-0 my-4"></div>
+  <div
+    class="page-search-suggestions-list scrollbar-thin  scrollbar-thumb-rounded-lg scrollbar-track-transparent scrollbar-thumb-gray-500">
+    <div *ngIf="items.length <= 0">
+      <span>Arama sonucu bulunamadı.</span>
+    </div>
+    <div *ngIf="items.length > 0" class="grid grid-cols-1 gap-4">
+      <div>
+        <ul>
+          <li *ngFor="let suggestion of items" (click)="onSuggestionClick(suggestion)"
+              class="page-search-suggestion-item">
+            <div class="flex flex-nowrap items-center">
+              <span class="flex flex-1">{{ suggestion.text }}</span>
+              <i class="flex flex-none justify-end">{{suggestion.hint}}</i>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</ng-template>

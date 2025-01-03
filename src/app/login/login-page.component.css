@@ -1,0 +1,37 @@
+.login-body{
+  height: 100%;
+}
+
+.form-text {
+  padding: 8px 0 !important;
+}
+
+.logo-container {
+  padding-bottom: 0 !important;
+}
+.logo-container > img {
+  margin-bottom: 35px;
+}
+.logo-container > h2 {
+  margin-top: 10px !important;
+}
+
+.button-container {
+  padding-top: 30px !important;
+}
+
+.center-div {
+  width: 100%; text-align: center
+}
+
+.messages{
+  text-align: left;
+}
+
+:host ::ng-deep div.ui-message {
+  padding: 15px !important;
+}
+
+.captcha {
+  font-size: 40px;
+}

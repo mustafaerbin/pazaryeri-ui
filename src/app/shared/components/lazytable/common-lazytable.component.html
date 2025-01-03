@@ -1,0 +1,246 @@
+<p-accordion *ngIf="header; else content" class="no-margin {{class}}"
+             (onOpen)="accordionEvent($event, true)"
+             (onClose)="accordionEvent($event, false)">
+  <p-accordionTab [header]="header | translate" [selected]="datatableOpen">
+    <ng-template *ngIf="true; then content"></ng-template>
+  </p-accordionTab>
+</p-accordion>
+
+<ng-template #content>
+  <p-panel [class]="header ? '' : class" [showHeader]="false" *ngIf="renderEmptyLabel()">
+    {{emptyLabel | translate}}
+  </p-panel>
+  <p-table styleClass="p-datatable-gridlines p-datatable-striped" #dt
+           *ngIf="!renderEmptyLabel()"
+           id="dt_common"
+           dataKey="id"
+           [class]="header ? '' : class"
+
+           [paginator]="true"
+           [rows]="20"
+           [totalRecords]="totalRecords"
+           [lazy]="true"
+           [lazyLoadOnInit]="false"
+           (onLazyLoad)="loadLazy($event)"
+           [loading]="loading"
+           [columns]="cols"
+           [value]="data"
+           (onPage)="onPage($event)"
+           [(selection)]="selectionArray">
+
+    <ng-template pTemplate="caption">
+      <div style="width: 100%; display: table;">
+        <div style="display:table-row;">
+          <div style="display:table-cell;  text-align: left; vertical-align: middle; width: 32px;">
+            <p-button type="button" (click)="exportToExcel()" icon="far fa-fw fa-file-excel"
+                      pTooltip="{{'label.excel.disa.aktar' | translate}}"></p-button>
+          </div>
+          <div *ngIf="checkbox" style="display:table-cell; text-align:left; vertical-align:middle;">
+            <div class="p-inputgroup"  style="width: 8rem">
+              <p-inputNumber id="kayitlariSecSpinner"
+                         [step]="1"
+                         [min]="0"
+                         [max]="totalRecords"
+                         [(ngModel)]="secilecekKayitSayisi"></p-inputNumber>
+              <button pButton type="button" icon="fa fa-check" class="ui-button-primary" (click)="kayitSec()"></button>
+              <button pButton type="button" icon="far fa-trash-alt" class="ui-button-secondary"
+                      (click)="kayitTemizle()"></button>
+            </div>
+          </div>
+
+          <div style="display:table-cell;  text-align: right; vertical-align: middle;">
+            <div style="display: inline-flex;">
+              <p-toggleButton *ngIf="false" [(ngModel)]="showFilter" offIcon="fa fa-filter" onIcon="fa fa-filter" onLabel=""
+                              offLabel=""></p-toggleButton>
+              <p-multiSelect [options]="columnOptions"
+                             [(ngModel)]="columns"
+                             optionLabel="label"
+                             [displaySelectedLabel]="false"
+                             [defaultLabel]="'btn.filter.columns' | translate">
+              </p-multiSelect>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngIf="checkbox || radio" class="app-table-select-col app-table-overlay">
+          <p-tableHeaderCheckbox id="tableHeaderCheckbox" *ngIf="checkbox && !disabledCheckBox"
+                                 (click)="checkboxAllEvent()"></p-tableHeaderCheckbox>
+        </th>
+
+        <ng-template ngFor let-col [ngForOf]="columns">
+
+          <th *ngIf="col.type === ColumnType.ENUM" [pSortableColumn]="col.sortable ? col.field : null"
+              [hidden]="isHidden(col.field)">
+            {{col.label}}
+            <p-sortIcon *ngIf="col.sortable" [field]="col.field + '_ack'"></p-sortIcon>
+          </th>
+
+          <th *ngIf="col.type === ColumnType.TRANSLATE" [pSortableColumn]="col.sortable ? col.field : null"
+              [hidden]="isHidden(col.field)">
+            {{col.label}}
+            <p-sortIcon *ngIf="col.sortable" [field]="col.field + '_trns'"></p-sortIcon>
+          </th>
+
+          <th *ngIf="col.type !== ColumnType.ENUM && col.type !== ColumnType.TRANSLATE"
+              [pSortableColumn]="col.sortable ? col.field : null"
+              [hidden]="isHidden(col.field)">
+            {{col.label}}
+            <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+          </th>
+
+        </ng-template>
+
+        <th class="app-table-icon-col app-table-overlay" *ngIf="islemler">
+          {{'label.islem' | translate}}
+        </th>
+      </tr>
+      <tr [ngStyle]="{'display':showFilter ? 'table-row': 'none'}">
+        <th *ngIf="checkbox || radio" class="app-table-select-col app-table-overlay"></th>
+
+        <th *ngFor="let col of columns" [ngSwitch]="col.type" [hidden]="isHidden(col.field)">
+          <div *ngSwitchCase="ColumnType.DATE_TIME">
+            <p-calendar (onSelect)="dt.filter($event ? $event.getTime() : null, col.field, 'dateTimeFilterCustom')"
+                        [monthNavigator]="true"
+                        [yearNavigator]="true"
+                        readonlyInput="true"
+                         yearRange="1960:2030"
+                        (onClearClick)="dt.filter(null, col.field, 'contains')"
+                        [dateFormat]="appStore.dateFormat" [showButtonBar]="true"></p-calendar>
+          </div>
+          <div *ngSwitchCase="ColumnType.DATE">
+            <p-calendar (onSelect)="dt.filter($event ? $event.getTime() : null, col.field, 'contains')"
+                        [monthNavigator]="true" [yearNavigator]="true"
+                         yearRange="1960:2030"
+                        readonlyInput="true"
+                        (onClearClick)="dt.filter(null, col.field, 'contains')"
+                        [dateFormat]="appStore.dateFormat" [showButtonBar]="true"></p-calendar>
+          </div>
+        </th>
+
+        <th *ngIf="islemler" class="app-table-overlay app-table-islemler"></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+
+      <tr id="row_{{index}}" [pSelectableRow]="rowData"
+          [ngClass]="!!this.rowFunc && !isChecked(rowData) && this.rowFunc(rowData) ? this.rowClass : null">
+        <td id="col_selection" [ngClass]="{'selected-row-complete': isChecked(rowData)}" *ngIf="checkbox || radio" class="app-table-overlay app-table-select-col">
+          <p-tableRadioButton id="{{'tableRadioButton' + index.toString()}}" [value]="rowData" *ngIf="radio"
+                              (click)="radioButtonEvent(rowData)"
+                              [disabled]="selectionArray == rowData || rowData.rowDisabled"></p-tableRadioButton>
+          <p-tableCheckbox id="{{'tableCheckbox' + index.toString()}}" [value]="rowData"
+                           *ngIf="checkbox" [disabled]="disabledCheckBox || secilenKayitSayisi || rowData.rowDisabled"
+                           (click)="checkboxEvent(rowData)"
+                           [attr.checked]="isChecked(rowData)"></p-tableCheckbox>
+        </td>
+
+        <td id="col_{{col.field}}" *ngFor="let col of columns" [ngSwitch]="col.type" [hidden]="isHidden(col.field)"
+            [ngClass]="{'app-table-number': col.type == ColumnType.NUMBER || col.type == ColumnType.DECIMAL || col.type == ColumnType.PARA || col.type == ColumnType.PARA_OBJECT, 'app-table-date' : col.type === ColumnType.DATE || col.type === ColumnType.DATE_TIME}">
+          <span class="p-column-title">{{col.label}}</span>
+          <span *ngSwitchCase="ColumnType.ENUM" [className]="call(col.classFn, rowData, col.field)">
+            {{rowData[col.field + '_ack']}}
+          </span>
+          <span *ngSwitchCase="ColumnType.TRANSLATE" [className]="call(col.classFn, rowData, col.field)">
+            {{rowData[col.field + '_trns']}}
+          </span>
+          <span *ngSwitchCase="ColumnType.DATE" [className]="call(col.classFn, rowData, col.field)">
+            {{rowData[col.field] | dateFormat}}
+          </span>
+          <span *ngSwitchCase="ColumnType.DATE_TIME" [className]="call(col.classFn, rowData, col.field)">
+            {{rowData[col.field] | dateTimeFormat}}
+          </span>
+
+          <span *ngSwitchCase="ColumnType.DECIMAL" [className]="call(col.classFn, rowData, col.field)">
+            {{rowData[col.field] | number:'1.2-2'}}
+          </span>
+          <span *ngSwitchCase="ColumnType.NUMBER" [className]="call(col.classFn, rowData, col.field)">
+            {{rowData[col.field]}}
+          </span>
+          <span *ngSwitchCase="ColumnType.PARA" [className]="call(col.classFn, rowData, col.field)">
+            {{rowData[col.field] | paraFormat}}
+          </span>
+          <span *ngSwitchCase="ColumnType.HTML" [className]="call(col.classFn, rowData, col.field)">
+            <div [class]="col.class" [innerHTML]="rowData[col.field]"></div>
+          </span>
+          <span *ngSwitchDefault [className]="call(col.classFn, rowData, col.field)">
+            <div [class]="col.class">
+              {{rowData[col.field]}}
+            </div>
+          </span>
+        </td>
+
+        <td id="col_islemler" [ngClass]="{'selected-row-complete': isChecked(rowData)}" *ngIf="islemler" class="app-table-islemler app-table-overlay">
+          <a *ngIf="goruntule" id="{{'a_goruntule_' + index.toString()}}" [routerLink]="rowData.id + '/goruntule'"
+             pTooltip="{{'label.goruntule' | translate}}" tooltipPosition="left">
+            <span class="fa fa-search"></span>
+          </a>
+          <a *ngIf="guncelle" id="{{'a_guncelle_' + index.toString()}}" [routerLink]="rowData.id + '/guncelle'"
+             pTooltip="{{'label.guncelle' | translate}}" tooltipPosition="left">
+            <span class="fa fa-pencil-alt"></span>
+          </a>
+          <a *ngIf="sil" id="{{'a_sil_' + index.toString()}}" [routerLink]="" (click)="silConfirm(rowData.id)"
+             pTooltip="{{'label.sil' | translate}}" tooltipPosition="left">
+            <span class="fa fa-trash-alt"></span>
+          </a>
+          <a *ngIf="silObject" id="{{'a_sil_obj_' + index.toString()}}" [routerLink]=""
+             (click)="silObjectConfirm(rowData)"
+             pTooltip="{{'label.sil' | translate}}" tooltipPosition="left">
+            <span class="fa fa-trash-alt"></span>
+          </a>
+          <a *ngIf="tarihce" id="{{'a_tarihce_' + index.toString()}}" [routerLink]="rowData.id + '/tarihce'"
+             pTooltip="{{'label.tarihce' | translate}}" tooltipPosition="left">
+            <span class="fa fa-history"></span>
+          </a>
+
+          <ng-template ngFor let-opt [ngForOf]="operations">
+            <a [id]="opt.id + index.toString()" [routerLink]="" (click)="call(opt.event, rowData)"
+               *ngIf="!opt.route && (!opt.rendered || call(opt.rendered, rowData))"
+               pTooltip="{{opt.tooltip | translate}}" tooltipPosition="left">
+              <span [class]="opt.class"></span>
+            </a>
+            <a [id]="opt.id + index.toString()"
+               [routerLink]="(opt.routeBase ? opt.routeBase: '') + rowData.id + opt.route"
+               *ngIf="opt.route && (!opt.rendered || call(opt.rendered, rowData))"
+               pTooltip="{{opt.tooltip | translate}}" tooltipPosition="left">
+              <span [class]="opt.class"></span>
+            </a>
+          </ng-template>
+
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="footer" *ngIf="footer" let-columns>
+      <tr>
+        <td id="col_footer_selection" *ngIf="checkbox || radio"></td>
+        <td id="col_footer_{{col.field}}" *ngFor="let col of columns" [ngSwitch]="col.type" [hidden]="isHidden(col.field)" class="app-table-number">
+          <span *ngSwitchCase="ColumnType.PARA">
+            <span *ngIf="col.footer">{{call(col.footer) | paraFormat}}</span>
+          </span>
+          <span *ngSwitchDefault>
+            <span *ngIf="col.footer">{{call(col.footer)}}</span>
+          </span>
+        </td>
+        <td id="col_footer_islemler" *ngIf="islemler"></td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+      <div style="display:flex;">
+        <div style="display: table-cell;width: 100%; text-align:left;">
+          <ng-content select=".summary"></ng-content>
+        </div>
+        <div style="width: 100%; text-align: right">
+          <div *ngIf="data">{{'label.kayit.sayisi' | translate}} {{totalRecords}}</div>
+          <div *ngIf="checkbox">{{'label.secilen.kayit.sayisi' | translate}} {{selectedItemCount}}</div>
+        </div>
+      </div>
+    </ng-template>
+
+  </p-table>
+</ng-template>

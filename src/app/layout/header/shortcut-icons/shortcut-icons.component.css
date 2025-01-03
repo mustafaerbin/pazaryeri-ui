@@ -1,0 +1,11 @@
+.shortcut-icon {
+  @apply text-gray-600 transition-colors
+}
+
+.shortcut-icon:hover {
+  @apply text-gray-800
+}
+
+.hamburger-menu-overlay .p-overlaypanel-content {
+  padding: 0 !important;
+}
